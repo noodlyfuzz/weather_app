@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/MainScreen/geolocation.dart';
+import 'package:weather_app/ForecastWindow/forecast_widget.dart';
 
 class MainScreenWidget extends StatefulWidget {
   const MainScreenWidget({Key? key}) : super(key: key);
@@ -43,7 +44,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           children: [
             GeolocationWidget(),
             // ThisDayWidget(),
-            // ForecastWidget(),
+            ForecastWidget(),
           ],
         ));
   }

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:http/http.dart' as http;
 
 class GeolocationWidget extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Geolcation',
+      title: 'Geolocation',
       home: Homepage(),
     );
   }
@@ -78,5 +79,25 @@ class _HomepageState extends State<Homepage> {
         ),
       ),
     );
+  }
+}
+
+class TodayDataService {
+  // http://api.openweathermap.org/data/2.5/weather?lat=53.9&lon=27.5667&units=metric&appid=6814eeb0575cbbab88a93bf90c1238e6
+
+  void getWeather(String lat, long) async {
+    final queryParameters = {
+      'lat': lat,
+      'lon': long,
+      'units': 'metric',
+      'appid': '6814eeb0575cbbab88a93bf90c1238e6'
+    };
+
+    final uri = Uri.https(
+        'api.openweathermap.org', '/data/2.5/weather', queryParameters);
+
+    final response = await http.get(uri);
+
+    print(response.body);
   }
 }
