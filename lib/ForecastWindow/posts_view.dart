@@ -20,13 +20,13 @@ class PostsView extends StatelessWidget {
               onRefresh: () async =>
                   BlocProvider.of<PostsBloc>(context).add(PullToRefreshEvent()),
               child: ListView.builder(
-                  itemCount: state.posts!.length,
+                  itemCount: state.post!.length,
                   itemBuilder: (context, index) {
                     return Card(
                       child: ListTile(
-                        title: Text('${state.posts![index].dt}'
-                            ' ${state.posts![index].main.temp}'
-                            ' ${state.posts![index].weather[0].description}'),
+                        title: Text('${state.post![index].dt}'
+                            ' ${state.post![index].main.temp}'
+                            ' ${state.post![index].weather[0].description}'),
                       ),
                     );
                   }),

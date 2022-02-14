@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app/ForecastWindow/forecast_data_service.dart';
-import 'weather_forecast_post.dart';
+import 'package:weather_app/TodaysWindow/today_data_service.dart';
+import 'today_weather_post.dart';
 
 abstract class PostsEvent {}
 
@@ -13,7 +13,7 @@ abstract class PostsState {}
 class LoadingPostsState extends PostsState {}
 
 class LoadedPostsState extends PostsState {
-  List<dynamic>? post;
+  dynamic post;
   LoadedPostsState({this.post});
 }
 
@@ -33,8 +33,8 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
       yield LoadingPostsState();
 
       try {
-        final posts = await _dataService.getPosts();
-        yield LoadedPostsState(post: posts);
+        final post = await _dataService.getPosts();
+        yield LoadedPostsState(post: post);
       } catch (e) {
         yield FailedToLoadPostsState(error: e as Error);
       }
