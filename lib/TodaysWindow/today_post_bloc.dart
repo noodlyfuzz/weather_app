@@ -2,11 +2,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/TodaysWindow/today_data_service.dart';
 import 'today_weather_post.dart';
 
-abstract class PostsEvent {}
+abstract class TodayPostsEvent {}
 
-class LoadPostsEvent extends PostsEvent {}
+class LoadPostsEvent extends TodayPostsEvent {}
 
-class PullToRefreshEvent extends PostsEvent {}
+class PullToRefreshEvent extends TodayPostsEvent {}
 
 abstract class PostsState {}
 
@@ -22,13 +22,13 @@ class FailedToLoadPostsState extends PostsState {
   FailedToLoadPostsState({this.error});
 }
 
-class PostsBloc extends Bloc<PostsEvent, PostsState> {
-  final _dataService = ForecastDataServiceB();
+class PostsBloc extends Bloc<TodayPostsEvent, PostsState> {
+  final _dataService = TodayDataService();
 
   PostsBloc() : super(LoadingPostsState());
 
   @override
-  Stream<PostsState> mapEventToState(PostsEvent event) async* {
+  Stream<PostsState> mapEventToState(TodayPostsEvent event) async* {
     if (event is LoadPostsEvent || event is PullToRefreshEvent) {
       yield LoadingPostsState();
 
