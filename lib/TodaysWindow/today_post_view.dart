@@ -37,7 +37,7 @@ class PostsView extends StatelessWidget {
                             '  precipitation ? ${state.post!.current.precipitation.value} mm    '
                             ' ${state.post!.current.pressure.value} hPa'
                             '\n'
-                            ' ${(double.parse(state.post!.current.wind.speed.value) * 3.6)} km/h     '
+                            ' ${(double.parse(state.post!.current.wind.speed.value) * 3.6).round()} km/h     '
                             '  wind direction?  ${state.post!.current.wind.direction.code}'),
                       ),
                       SizedBox(height: 600),
