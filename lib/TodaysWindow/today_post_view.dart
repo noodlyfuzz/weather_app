@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/TodaysWindow/today_post_bloc.dart';
-import 'dart:convert';
-
-import 'today_weather_post.dart';
+import 'package:share_plus/share_plus.dart';
 
 class PostsView extends StatelessWidget {
+  String? country;
+  String? city;
+  String? currentTemperature;
+  String? weather;
+  String? humidity;
+  String? precipitation;
+  String? pressure;
+  String? windSpeed;
+  String? windDirection;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,6 +24,18 @@ class PostsView extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (state is LoadedPostsState) {
+            city = '${state.post!.current.city.name}';
+            country = '${state.post!.current.city.country.t}';
+            currentTemperature =
+                '${double.parse(state.post!.current.temperature.value).toStringAsFixed(1)} °C';
+            weather = '${state.post!.current.weather.value}';
+            humidity = '${state.post!.current.humidity.value} %';
+            precipitation = '${state.post!.current.precipitation.value} mm';
+            pressure = '${state.post!.current.pressure.value} hPa';
+            windSpeed =
+                '${(double.parse(state.post!.current.wind.speed.value) * 3.6).round()} km/h';
+            windDirection = '${state.post!.current.wind.direction.code}';
+
             return RefreshIndicator(
               onRefresh: () async =>
                   BlocProvider.of<PostsBloc>(context).add(PullToRefreshEvent()),
@@ -25,22 +45,32 @@ class PostsView extends StatelessWidget {
                     children: [
                       SizedBox(height: 70),
                       Container(
-                        child: Text('${state.post!.current.city.name}'
-                            ' ${state.post!.current.city.country.t}'
+                        child: Text('${country}'
+                            ' ${city}'
                             '\n'
-                            ' ${state.post!.current.temperature.value} | '
-                            ' ${state.post!.current.weather.value}'),
+                            ' ${currentTemperature}'
+                            ' ${weather}'),
                       ),
                       SizedBox(height: 100),
                       Container(
-                        child: Text('${state.post!.current.humidity.value} %  '
-                            '  precipitation ? ${state.post!.current.precipitation.value} mm    '
-                            ' ${state.post!.current.pressure.value} hPa'
+                        child: Text('${humidity}'
+                            '${precipitation}'
+                            ' ${pressure}'
                             '\n'
-                            ' ${(double.parse(state.post!.current.wind.speed.value) * 3.6).round()} km/h     '
-                            '  wind direction?  ${state.post!.current.wind.direction.code}'),
+                            '${windSpeed}'
+                            '${windDirection}'),
                       ),
-                      SizedBox(height: 600),
+                      SizedBox(height: 300),
+                      ElevatedButton(
+                          onPressed: () async {
+                            await Share.share('Location is ${city}, ${country} \n The weather for today is:' +
+                                ' \n  Temperature: ${currentTemperature}, outside is ${weather}.' +
+                                ' Humidity is ${humidity}, precipitation is ${precipitation} ' +
+                                'and atmospheric pressure about  ${pressure}. ' +
+                                'Wind speed is ${windSpeed} with ${windDirection} direction.');
+                          },
+                          child: Text('Share')),
+                      SizedBox(height: 200),
                     ],
                   ),
                 ),
