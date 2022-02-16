@@ -16,7 +16,7 @@ class PostsView extends StatelessWidget {
   String? windDirection;
   String? weatherCondition;
   WeatherConditions? wc = WeatherConditions();
-// FittedBox(child: Image.asset('assets/images/background/wallpaper1')),
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

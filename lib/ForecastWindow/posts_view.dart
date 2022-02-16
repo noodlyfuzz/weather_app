@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/ForecastWindow/posts_bloc.dart';
 import 'package:weather_app/Theme/weather_conditions.dart';
 import 'dart:convert';
+import 'package:intl/intl.dart';
 
 import 'weather_forecast_post.dart';
 
 class PostsView extends StatelessWidget {
   WeatherConditions? wc = WeatherConditions();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +26,8 @@ class PostsView extends StatelessWidget {
               child: ListView.builder(
                   itemCount: state.posts!.length,
                   itemBuilder: (context, index) {
+                    DateFormat df = DateFormat.Hm();
+                    DateTime dt = state.posts![index].dtTxt;
                     return Card(
                       child: ListTile(
                         title: Row(
@@ -34,8 +38,9 @@ class PostsView extends StatelessWidget {
                               child: Image.asset(
                                   '${wc!.getWeatherCondition(int.parse('${state.posts![index].weather[0].id}'))}'),
                             ),
-                            Text('${state.posts![index].dt}'
-                                ' ${state.posts![index].main.temp}'
+                            Text('${df.format(dt)}'
+                                // '${dt.hour}:${dt.minute} \n'
+                                ' ${state.posts![index].main.temp.toInt()}'
                                 ' ${state.posts![index].weather[0].description}'),
                           ],
                         ),
