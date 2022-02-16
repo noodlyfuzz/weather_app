@@ -27,21 +27,45 @@ class PostsView extends StatelessWidget {
                   itemCount: state.posts!.length,
                   itemBuilder: (context, index) {
                     DateFormat df = DateFormat.Hm();
+                    DateFormat dfD = DateFormat.EEEE();
                     DateTime dt = state.posts![index].dtTxt;
+
                     return Card(
                       child: ListTile(
                         title: Row(
                           children: [
-                            SizedBox(
-                              height: 100,
-                              width: 100,
-                              child: Image.asset(
-                                  '${wc!.getWeatherCondition(int.parse('${state.posts![index].weather[0].id}'))}'),
+                            Expanded(
+                              flex: 3,
+                              child: SizedBox(
+                                height: 100,
+                                width: 100,
+                                child: Image.asset(
+                                    '${wc!.getWeatherCondition(int.parse('${state.posts![index].weather[0].id}'))}'),
+                              ),
                             ),
-                            Text('${df.format(dt)}'
-                                // '${dt.hour}:${dt.minute} \n'
-                                ' ${state.posts![index].main.temp.toInt()}'
-                                ' ${state.posts![index].weather[0].description}'),
+                            Expanded(
+                              flex: 4,
+                              child: Column(
+                                children: [
+                                  Text('${dfD.format(dt)} ',
+                                      style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 27, 221, 255))),
+                                  Text('${df.format(dt)} '),
+                                  Text(
+                                      '${state.posts![index].weather[0].description}'),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 5,
+                              child: Text(
+                                  '${state.posts![index].main.temp.toInt()} °C',
+                                  style: TextStyle(
+                                      fontSize: 43,
+                                      color: Color.fromARGB(255, 27, 221, 255)),
+                                  textAlign: TextAlign.end),
+                            )
                           ],
                         ),
                       ),
