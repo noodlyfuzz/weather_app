@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/ForecastWindow/posts_bloc.dart';
+import 'package:weather_app/Theme/weather_conditions.dart';
 import 'dart:convert';
 
 import 'weather_forecast_post.dart';
 
 class PostsView extends StatelessWidget {
+  WeatherConditions? wc = WeatherConditions();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,9 +26,19 @@ class PostsView extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Card(
                       child: ListTile(
-                        title: Text('${state.posts![index].dt}'
-                            ' ${state.posts![index].main.temp}'
-                            ' ${state.posts![index].weather[0].description}'),
+                        title: Row(
+                          children: [
+                            SizedBox(
+                              height: 100,
+                              width: 100,
+                              child: Image.asset(
+                                  '${wc!.getWeatherCondition(int.parse('${state.posts![index].weather[0].id}'))}'),
+                            ),
+                            Text('${state.posts![index].dt}'
+                                ' ${state.posts![index].main.temp}'
+                                ' ${state.posts![index].weather[0].description}'),
+                          ],
+                        ),
                       ),
                     );
                   }),
