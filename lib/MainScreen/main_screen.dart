@@ -14,7 +14,7 @@ class MainScreenWidget extends StatefulWidget {
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 0;
-  String _title = 'Weather here';
+  String _title = 'Awesome Weather';
   String? forecastLocation = '';
 
   @override
