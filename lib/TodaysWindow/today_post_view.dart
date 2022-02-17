@@ -48,7 +48,7 @@ class PostsView extends StatelessWidget {
                 child: Center(
                   child: Column(
                     children: [
-                      SizedBox(height: 70),
+                      SizedBox(height: 50),
                       SizedBox(
                         height: 200,
                         width: 200,
@@ -69,16 +69,82 @@ class PostsView extends StatelessWidget {
                                   color: AppColors.mainAppTextColor)),
                         ],
                       ),
-                      SizedBox(height: 100),
-                      Container(
-                        child: Text('${humidity}'
-                            '${precipitation}'
-                            ' ${pressure}'
-                            '\n'
-                            '${windSpeed}'
-                            '${windDirection}'),
+                      SizedBox(height: 50),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                                child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 70,
+                                  width: 70,
+                                  child:
+                                      Image.asset('assets/images/humidity.png'),
+                                ),
+                                Text('${humidity}')
+                              ],
+                            )),
+                            Expanded(
+                                child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 70,
+                                  width: 70,
+                                  child: Image.asset(
+                                      'assets/images/precipitation.png'),
+                                ),
+                                Text('${precipitation}')
+                              ],
+                            )),
+                            Expanded(
+                                child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 45,
+                                  width: 45,
+                                  child:
+                                      Image.asset('assets/images/pressure.png'),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text('${pressure}')
+                              ],
+                            )),
+                          ]),
+                      SizedBox(
+                        height: 50,
                       ),
-                      SizedBox(height: 150),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                                child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 70,
+                                  width: 70,
+                                  child: Image.asset('assets/images/wind.png'),
+                                ),
+                                Text('${windSpeed}')
+                              ],
+                            )),
+                            Expanded(
+                                child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 60,
+                                  width: 60,
+                                  child: Image.asset(
+                                      'assets/images/windDirection.png'),
+                                ),
+                                SizedBox(height: 5),
+                                Text('${windDirection}')
+                              ],
+                            )),
+                          ]),
+                      SizedBox(height: 50),
                       ElevatedButton(
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
