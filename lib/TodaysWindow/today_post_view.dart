@@ -65,7 +65,14 @@ class PostsView extends StatelessWidget {
                               '   | '
                               ' ${weather![0].toUpperCase()}${weather!.substring(1)}',
                               style: TextStyle(
-                                  fontSize: 20,
+                                  shadows: <Shadow>[
+                                    Shadow(
+                                      offset: Offset(1.0, 1.0),
+                                      blurRadius: 3.0,
+                                      color: AppColors.mainAppShadowColor,
+                                    )
+                                  ],
+                                  fontSize: 21,
                                   color: AppColors.mainAppTextColor)),
                         ],
                       ),
@@ -101,8 +108,8 @@ class PostsView extends StatelessWidget {
                                 child: Column(
                               children: [
                                 SizedBox(
-                                  height: 45,
-                                  width: 45,
+                                  height: 70,
+                                  width: 70,
                                   child:
                                       Image.asset('assets/images/pressure.png'),
                                 ),
