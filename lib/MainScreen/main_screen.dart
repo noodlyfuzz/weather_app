@@ -86,8 +86,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedTab,
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.grey[850],
-          unselectedItemColor: Colors.white,
+          selectedItemColor: Color.fromARGB(255, 255, 255, 255),
+          unselectedItemColor: Color.fromARGB(184, 2, 162, 173),
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.today), label: 'today'),
             BottomNavigationBarItem(

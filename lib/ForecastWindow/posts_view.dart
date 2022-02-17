@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/ForecastWindow/posts_bloc.dart';
+import 'package:weather_app/Theme/app_colors.dart';
 import 'package:weather_app/Theme/weather_conditions.dart';
 import 'dart:convert';
 import 'package:intl/intl.dart';
@@ -49,8 +50,7 @@ class PostsView extends StatelessWidget {
                                 children: [
                                   Text('${dfD.format(dt)} ',
                                       style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 27, 221, 255))),
+                                          color: AppColors.mainAppTextColor)),
                                   Text('${df.format(dt)} '),
                                   Text(
                                       '${state.posts![index].weather[0].description}'),
@@ -62,8 +62,15 @@ class PostsView extends StatelessWidget {
                               child: Text(
                                   '${state.posts![index].main.temp.toInt()} °C',
                                   style: TextStyle(
+                                      shadows: <Shadow>[
+                                        Shadow(
+                                          offset: Offset(1.0, 1.0),
+                                          blurRadius: 7.0,
+                                          color: AppColors.mainAppShadowColor,
+                                        )
+                                      ],
                                       fontSize: 43,
-                                      color: Color.fromARGB(255, 27, 221, 255)),
+                                      color: AppColors.mainAppTextColor),
                                   textAlign: TextAlign.end),
                             )
                           ],

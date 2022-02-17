@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/Theme/app_colors.dart';
 import 'package:weather_app/Theme/weather_conditions.dart';
 import 'package:weather_app/TodaysWindow/today_post_bloc.dart';
 import 'package:share_plus/share_plus.dart';
@@ -54,12 +55,19 @@ class PostsView extends StatelessWidget {
                         child: Image.asset(
                             '${wc!.getWeatherCondition(int.parse(weatherCondition!))}'),
                       ),
-                      Container(
-                        child: Text('${country}'
-                            ' ${city}'
-                            '\n'
-                            ' ${currentTemperature}'
-                            ' ${weather}'),
+                      Column(
+                        children: [
+                          Text('${country}, '
+                              ' ${city}'),
+                          SizedBox(height: 10),
+                          Text(
+                              '${currentTemperature}'
+                              '   | '
+                              ' ${weather![0].toUpperCase()}${weather!.substring(1)}',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: AppColors.mainAppTextColor)),
+                        ],
                       ),
                       SizedBox(height: 100),
                       Container(
@@ -70,8 +78,18 @@ class PostsView extends StatelessWidget {
                             '${windSpeed}'
                             '${windDirection}'),
                       ),
-                      SizedBox(height: 300),
+                      SizedBox(height: 150),
                       ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  AppColors.mainAppBarColor),
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.white),
+                              shadowColor: MaterialStateProperty.all<Color>(
+                                  AppColors.mainAppShadowColor),
+                              elevation: MaterialStateProperty.all(3.0)),
+
+                          // foregroundColor:  MaterialStateProperty.all<Color>(AppColors.mainAppBarColor),),
                           onPressed: () async {
                             await Share.share('Location is ${city}, ${country} \n The weather for today is:' +
                                 ' \n  Temperature: ${currentTemperature}, outside is ${weather}.' +
@@ -80,7 +98,7 @@ class PostsView extends StatelessWidget {
                                 'Wind speed is ${windSpeed} with ${windDirection} direction.');
                           },
                           child: Text('Share')),
-                      SizedBox(height: 200),
+                      SizedBox(height: 70),
                     ],
                   ),
                 ),
